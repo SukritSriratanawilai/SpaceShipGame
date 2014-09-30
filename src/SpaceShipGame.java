@@ -1,3 +1,5 @@
+import javax.swing.text.Highlighter.Highlight;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -6,19 +8,21 @@ import org.newdawn.slick.SlickException;
 
 
 public class SpaceShipGame extends BasicGame {
-
+	public static final int Game_High = 600;
+	public static final int	Game_Width = 800;
+	MyShip ship;
 	public SpaceShipGame(String title) {
 		super(title);
 	}
 
 	@Override
 	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
-	
+		ship.draw();
 	}
 
 	@Override
 	public void init(GameContainer arg0) throws SlickException {
-	
+		ship = new MyShip(Game_Width/4 , Game_High/3); 
 	}
 
 	@Override
@@ -30,7 +34,7 @@ public class SpaceShipGame extends BasicGame {
 		try {		    	
 			SpaceShipGame game = new SpaceShipGame("SpaceShipGame");
 			AppGameContainer container = new AppGameContainer(game);
-			container.setDisplayMode(640, 480, false);
+			container.setDisplayMode(Game_Width , Game_High , false);
 			container.setMinimumLogicUpdateInterval(1000 / 60);
 			container.start();
 		} 
