@@ -17,4 +17,20 @@ public class MyShip {
 	public void draw() {
 		shipImage.draw(shipX,shipY);
 	}
+
+	public void moveUp() {
+		
+		if (shipY != 0) {
+			shipY -= 5;
+		}
+		
+	}
+
+	public void moveDown(int maxScreen) {
+		
+		if (shipY != maxScreen - 80) {
+			shipY += 5;
+		}
+		
+	}
 }
