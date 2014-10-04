@@ -9,8 +9,11 @@ import org.newdawn.slick.SlickException;
 public class SpaceShipGame extends BasicGame {
 	public static final int Game_High = 600;
 	public static final int	Game_Width = 800;
-	public static final int	enemy_count = 8;
+	public static final int	enemy_count = 4;
+	public static int Hp = 1;
+	public boolean check;
 	MyShip ship;
+	//Bullet bullet;
 	private EnemyShip[] enemyShip;
 	int score = 0;
 	public SpaceShipGame(String title) {
@@ -24,12 +27,15 @@ public class SpaceShipGame extends BasicGame {
 			enemy.draw();
 		}
 		g.drawString("score " + score, Game_Width - 120, 10);
+		g.drawString("hp " + Hp, Game_Width/8, 10);
+		//bullet.render(g);
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		ship = new MyShip(Game_Width/4 , Game_High/3);
 		initEnemyShip();
+		//bullet = new Bullet(ship.getX(), ship.getY());
 	}
 
 	private void initEnemyShip() throws SlickException {
@@ -47,10 +53,25 @@ public class SpaceShipGame extends BasicGame {
 		UpdateShipMovement(input , delta);
 		for (EnemyShip enemy : enemyShip) {
 			enemy.Update();
-		}
+			check = ship.updateShipCatch(enemy);
+			if (check == true)
+			{
+				Hp-=1;
+				check = false;
+			}
+		}		
+		//UpdateBullet(input , delta);
 	}
 	
-	
+
+	/*private void UpdateBullet(Input input, int delta) {
+		
+		if (input.isKeyDown(Input.KEY_SPACE)) {
+			bullet.update();
+		}
+		bullet.update(ship.getX() , ship.getY());
+	}*/
+
 	private void UpdateShipMovement(Input input, int delta) {
 		
 		if (input.isKeyDown(Input.KEY_UP)) {

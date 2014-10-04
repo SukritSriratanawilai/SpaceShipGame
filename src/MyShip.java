@@ -7,7 +7,11 @@ public class MyShip {
 	
 	private int shipX;
 	private int shipY;
+	private static final int shipWidth = 60;
+	private static final int shipHIGH = 60;
 	private Image shipImage;
+	public float getX() { return shipX; }
+	public float getY() { return shipY; }
 	
 	public MyShip(int x, int y) throws SlickException {
 		shipImage = new Image("res/ship.png");
@@ -33,5 +37,12 @@ public class MyShip {
 			shipY += 5;
 		}
 		
+	}
+	
+	public boolean updateShipCatch(EnemyShip enemy) {
+		if (shipX + shipWidth - enemy.getX() == 0) {
+			return true;
+		}
+		return false;
 	}
 }

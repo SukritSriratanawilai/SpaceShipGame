@@ -11,6 +11,8 @@ public class EnemyShip {
 	private Image shipImage;
 	private int vx = 5;
 	Random random = new Random();
+	public float getX() { return shipX; }
+	public float getY() { return shipY; }
 	
 	public EnemyShip(int x, int y) throws SlickException {
 		shipImage = new Image("res/Enemyship.png");
