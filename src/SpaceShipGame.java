@@ -9,7 +9,7 @@ import org.newdawn.slick.SlickException;
 public class SpaceShipGame extends BasicGame {
 	public static final int Game_High = 600;
 	public static final int	Game_Width = 800;
-	public static final int	enemy_count = 2;
+	public static final int	enemy_count = 10;
 	//public static final int	bullet_count = 2;
 	//private int numbullet = 0;
 	public static int Hp = 1;
