@@ -30,8 +30,14 @@ public class EnemyShip {
 	public void Update() {
 		shipX -= vx;
 	}
+	
 	public void Death(int MaxX , int MaxY) {
-		shipX = MaxX;
+		shipX = MaxX*2;
+		this.randomy(MaxY);
+	}
+	
+	public void reEnemyToTheScreen(int MaxX, int MaxY) {
+		this.shipX = MaxX*2;
 		this.randomy(MaxY);
 	}
 	

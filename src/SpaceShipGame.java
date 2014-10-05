@@ -74,22 +74,28 @@ public class SpaceShipGame extends BasicGame {
 		if (iscatch == false) {
 			UpdateShipMovement(input , delta);
 			UpdateBullet(input , delta);
-			for (EnemyShip enemy : enemyShip) {
-				enemy.Update();
-				isBulletCatch = bullet.updateBulletCatch(enemy);
-				if  (isBulletCatch == true) {
-					score+=1;
-					enemy.Death(Game_Width , Game_High);
-				}
-				check = ship.updateShipCatch(enemy);
-				if (check == true)
-				{
-					Hp-=1;
-					check = false;
-					iscatch = true;
-				}
-			}		
-			
+			UpdateEnemyBullet();		
+		}
+	}
+
+	private void UpdateEnemyBullet() {
+		for (EnemyShip enemy : enemyShip) {
+			enemy.Update();
+			isBulletCatch = bullet.updateBulletCatch(enemy);
+			if  (isBulletCatch == true) {
+				score+=1;
+				enemy.Death(Game_Width , Game_High);
+			}
+			check = ship.updateShipCatch(enemy);
+			if (check == true)
+			{
+				Hp-=1;
+				check = false;
+				iscatch = true;
+			}
+			if (enemy.getX() < -50) {
+				enemy.reEnemyToTheScreen(Game_Width , Game_High);
+			}
 		}
 	}
 	
