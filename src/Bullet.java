@@ -1,4 +1,3 @@
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -6,7 +5,6 @@ import org.newdawn.slick.SlickException;
 public class Bullet {
 	protected float BulletX;
 	protected float BulletY;
-	//private static final float BULLET_SIZE = 5;
 	boolean checkGunFire;
 	Image bulletImage;
 	
@@ -37,8 +35,8 @@ public class Bullet {
 	}
 
 	public boolean updateBulletCatch(EnemyShip enemy) {
-		if (Math.abs(BulletX - enemy.getX()) < 60) {
-			if (Math.abs(BulletY - enemy.getY()) < 60){
+		if (Math.abs(BulletX - enemy.getX()) < 40) {
+			if (Math.abs(BulletY - enemy.getY()) < 40){
 				return true;
 			}			
 		}

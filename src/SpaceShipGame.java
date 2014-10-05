@@ -79,7 +79,7 @@ public class SpaceShipGame extends BasicGame {
 				isBulletCatch = bullet.updateBulletCatch(enemy);
 				if  (isBulletCatch == true) {
 					score+=1;
-					enemy.Death(Game_Width);
+					enemy.Death(Game_Width , Game_High);
 				}
 				check = ship.updateShipCatch(enemy);
 				if (check == true)
