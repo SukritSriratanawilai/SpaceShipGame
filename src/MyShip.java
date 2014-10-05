@@ -12,6 +12,8 @@ public class MyShip {
 	private Image shipImage;
 	public float getX() { return shipX; }
 	public float getY() { return shipY; }
+	public float getShipWidth() { return shipWidth; }
+	public float getShipHigh() { return shipHIGH; }
 	
 	public MyShip(int x, int y) throws SlickException {
 		shipImage = new Image("res/ship.png");
