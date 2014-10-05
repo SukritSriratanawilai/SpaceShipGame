@@ -1,5 +1,6 @@
 import java.util.Random;
 
+import org.newdawn.slick.Game;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -30,6 +31,9 @@ public class EnemyShip {
 
 	public void Update() {
 		shipX -= vx;
+	}
+	public void Death(int MaxX) {
+		shipX = MaxX;
 	}
 	
 }
