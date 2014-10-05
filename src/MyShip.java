@@ -40,8 +40,10 @@ public class MyShip {
 	}
 	
 	public boolean updateShipCatch(EnemyShip enemy) {
-		if (shipX + shipWidth - enemy.getX() == 0) {
-			return true;
+		if (Math.abs(shipX - enemy.getX()) < 60) {
+			if (Math.abs(shipY - enemy.getY()) < 60){
+				return true;
+			}			
 		}
 		return false;
 	}

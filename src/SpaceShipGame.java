@@ -9,9 +9,10 @@ import org.newdawn.slick.SlickException;
 public class SpaceShipGame extends BasicGame {
 	public static final int Game_High = 600;
 	public static final int	Game_Width = 800;
-	public static final int	enemy_count = 4;
+	public static final int	enemy_count = 2;
 	public static int Hp = 1;
 	public boolean check;
+	private boolean iscatch = false;
 	MyShip ship;
 	//Bullet bullet;
 	private EnemyShip[] enemyShip;
@@ -50,17 +51,20 @@ public class SpaceShipGame extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 		
 		Input input = container.getInput();
-		UpdateShipMovement(input , delta);
-		for (EnemyShip enemy : enemyShip) {
-			enemy.Update();
-			check = ship.updateShipCatch(enemy);
-			if (check == true)
-			{
-				Hp-=1;
-				check = false;
-			}
-		}		
-		//UpdateBullet(input , delta);
+		if (iscatch == false) {
+			UpdateShipMovement(input , delta);
+			for (EnemyShip enemy : enemyShip) {
+				enemy.Update();
+				check = ship.updateShipCatch(enemy);
+				if (check == true)
+				{
+					Hp-=1;
+					check = false;
+					iscatch = true;
+				}
+			}		
+			//UpdateBullet(input , delta);
+		}
 	}
 	
 
