@@ -23,6 +23,10 @@ public class EnemyShip {
 		shipY = random.nextInt(MaxY-80);
 	}
 
+	public void randomx(int MaxX) {
+		shipX = random.nextInt(MaxX) + MaxX;
+	}
+	
 	public void draw() {
 		shipImage.draw(shipX,shipY);
 	}
@@ -34,11 +38,13 @@ public class EnemyShip {
 	public void Death(int MaxX , int MaxY) {
 		shipX = MaxX*2;
 		this.randomy(MaxY);
+		this.randomx(MaxX);
 	}
 	
 	public void reEnemyToTheScreen(int MaxX, int MaxY) {
 		this.shipX = MaxX*2;
 		this.randomy(MaxY);
+		this.randomx(MaxX);
 	}
 	
 }

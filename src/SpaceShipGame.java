@@ -10,9 +10,9 @@ public class SpaceShipGame extends BasicGame {
 	public static final int Game_High = 600;
 	public static final int	Game_Width = 800;
 	public static final int	enemy_count = 10;
-	public static int Hp = 1;
-	public boolean check;
-	private boolean iscatch = false;
+	public static int Hp = 10;
+	public boolean checkCatch;
+	private boolean isDeath = false;
 	private boolean isBulletCatch = false;
 	private boolean isfire = false;
 	private MyShip ship;
@@ -53,6 +53,7 @@ public class SpaceShipGame extends BasicGame {
 		for(int i = 0 ; i < enemy_count ; i++) {
 			enemyShip[i] = new EnemyShip(Game_Width,Game_High);
 			enemyShip[i].randomy(Game_High);
+			enemyShip[i].randomx(Game_Width);
 		}
 	}
 
@@ -60,14 +61,14 @@ public class SpaceShipGame extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 		
 		Input input = container.getInput();
-		if (iscatch == false) {
+		if (isDeath == false) {
 			UpdateShipMovement(input , delta);
 			UpdateBullet(input , delta);
-			UpdateEnemyBullet();		
+			UpdateEnemyShip();		
 		}
 	}
 
-	private void UpdateEnemyBullet() {
+	private void UpdateEnemyShip() {
 		for (EnemyShip enemy : enemyShip) {
 			enemy.Update();
 			isBulletCatch = bullet.updateBulletCatch(enemy);
@@ -75,12 +76,15 @@ public class SpaceShipGame extends BasicGame {
 				score+=1;
 				enemy.Death(Game_Width , Game_High);
 			}
-			check = ship.updateShipCatch(enemy);
-			if (check == true)
+			checkCatch = ship.updateShipCatch(enemy);
+			if (checkCatch == true)
 			{
 				Hp-=1;
-				check = false;
-				iscatch = true;
+				enemy.Death(Game_Width , Game_High);
+				checkCatch = false;
+				if (Hp == 0) {
+					isDeath = true;		
+				}
 			}
 			if (enemy.getX() < -50) {
 				enemy.reEnemyToTheScreen(Game_Width , Game_High);
