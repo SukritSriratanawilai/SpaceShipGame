@@ -10,6 +10,7 @@ public class SpaceShipGame extends BasicGame {
 	public static final int Game_High = 600;
 	public static final int	Game_Width = 800;
 	public static final int	enemy_count = 10;
+	public static final int	bullet_count = 200;
 	public static int Hp = 10;
 	public boolean checkCatch;
 	private boolean isDeath = false;
@@ -17,6 +18,7 @@ public class SpaceShipGame extends BasicGame {
 	private boolean isfire = false;
 	private MyShip ship;
 	private Bullet bullet;
+	//private Bullet[] bulletArray;
 	private EnemyShip[] enemyShip;
 	int score = 0;
 	
@@ -34,6 +36,9 @@ public class SpaceShipGame extends BasicGame {
 		g.drawString("hp " + Hp, Game_Width/8, 10);
 		if (isfire == true) {	
 			bullet.draw();
+			/*for (int i = 1 ; i < bullet_count ; i++) {
+				bulletArray[i].draw();
+			}*/
 		}
 	}
 
@@ -46,6 +51,10 @@ public class SpaceShipGame extends BasicGame {
 
 	private void initBullet() throws SlickException {
 		bullet = new Bullet(ship.getX() + ship.getShipWidth()/2, ship.getY() + ship.getShipHigh()/2);
+		/*bulletArray = new Bullet[bullet_count];
+		for(int i = 0 ; i < bullet_count ; i++) {
+			bulletArray[i] = new Bullet();
+		}*/
 	}
 
 	private void initEnemyShip() throws SlickException {

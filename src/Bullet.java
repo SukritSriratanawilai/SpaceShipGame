@@ -13,6 +13,10 @@ public class Bullet {
 		bulletImage = new Image("res/Bullet1.png");
 	}
 		
+	public Bullet() throws SlickException {
+		bulletImage = new Image("res/Bullet1.png");
+	}
+	
 	public void draw() {	
 		bulletImage.draw(BulletX,BulletY);
 	}
@@ -35,8 +39,8 @@ public class Bullet {
 	}
 
 	public boolean updateBulletCatch(EnemyShip enemy) {
-		if (Math.abs(BulletX - enemy.getX()) < 40) {
-			if (Math.abs(BulletY - enemy.getY()) < 40){
+		if (Math.abs(BulletX - enemy.getX()) < 30) {
+			if (BulletY - enemy.getY() >= 0 && BulletY - enemy.getY() <= 60){
 				return true;
 			}			
 		}
