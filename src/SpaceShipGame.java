@@ -10,15 +10,13 @@ public class SpaceShipGame extends BasicGame {
 	public static final int Game_High = 600;
 	public static final int	Game_Width = 800;
 	public static final int	enemy_count = 10;
-	public static final int	bullet_count = 200;
+	public static final int	max_bullet = 200;
 	public static int Hp = 10;
 	public boolean checkCatch;
 	private boolean isDeath = false;
 	private boolean isBulletCatch = false;
-	private boolean isfire = false;
-	private boolean [] isfireArray = new boolean[bullet_count];
+	private boolean [] isfireArray = new boolean[max_bullet];
 	private MyShip ship;
-	//private Bullet bullet;
 	private Bullet[] bulletArray;
 	private EnemyShip[] enemyShip;
 	int score = 0;
@@ -30,18 +28,15 @@ public class SpaceShipGame extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		ship.draw();
 		for (EnemyShip enemy : enemyShip) {
 			enemy.draw();
 		}
 		g.drawString("score " + score, Game_Width - 120, 10);
 		g.drawString("hp " + Hp, Game_Width/8, 10);
-		//if (isfire == true) {	
-		//	bullet.draw();
-			for (int i = 1 ; i < bullet_count ; i++) {
-				bulletArray[i].draw();
-		//	}
+		for (int i = 1 ; i < max_bullet ; i++) {
+			bulletArray[i].draw();
 		}
+		ship.draw();
 	}
 
 	@Override
@@ -52,9 +47,8 @@ public class SpaceShipGame extends BasicGame {
 	}
 
 	private void initBullet() throws SlickException {
-		//bullet = new Bullet(ship.getX() + ship.getShipWidth()/2, ship.getY() + ship.getShipHigh()/2);
-		bulletArray = new Bullet[bullet_count];
-		for(int i = 0 ; i < bullet_count ; i++) {
+		bulletArray = new Bullet[max_bullet];
+		for(int i = 0 ; i < max_bullet ; i++) {
 			bulletArray[i] = new Bullet(ship.getX() + ship.getShipWidth()/2, ship.getY() + ship.getShipHigh()/2);
 		}
 	}
@@ -82,7 +76,6 @@ public class SpaceShipGame extends BasicGame {
 	private void UpdateEnemyShip() {
 		for (EnemyShip enemy : enemyShip) {
 			enemy.Update();
-			//isBulletCatch = bullet.updateBulletCatch(enemy);
 			for (int i = 0 ; i < countBullet ; i++)
 			{	
 				isBulletCatch = bulletArray[i].updateBulletCatch(enemy);
@@ -114,35 +107,28 @@ public class SpaceShipGame extends BasicGame {
 	private void UpdateBullet(Input input, int delta) throws SlickException {
 		
 		if (input.isKeyPressed(Input.KEY_SPACE)) {
-			isfire = true;
 			isfireArray[countBullet] = true;
 			System.out.println("fire");
-			//bullet.setXY(ship.getX()+ ship.getShipWidth()/2, ship.getY()+ ship.getShipHigh()/2);
 			bulletArray[countBullet].setXY(ship.getX()+ ship.getShipWidth()/2, ship.getY()+ ship.getShipHigh()/2);
 			countBullet++;
 		}
-		for (int i = 0 ; i < countBullet ; i++) {
+		for (int i = 0 ; i <= countBullet ; i++) {
 			bulletArray[i].update();
 		}
-		/*if (isfire == true) {
-			isfire = false;
-			countBullet++;
-		}*/
-		//bullet.update();
 	}
 
 	private void UpdateShipMovement(Input input, int delta) {
 		
 		if (input.isKeyDown(Input.KEY_UP)) {
 			ship.moveUp();
-			for (Bullet bullet : bulletArray) {
-				bullet.moveUp();
+			for (int i = countBullet+1 ; i < max_bullet ; i++) {
+				bulletArray[i].moveUp();
 			}
 		}
 		if (input.isKeyDown(Input.KEY_DOWN)) {
 			ship.moveDown(Game_High);
-			for (Bullet bullet : bulletArray) {
-				bullet.moveDown();
+			for (int i = countBullet+1 ; i < max_bullet ; i++) {
+				bulletArray[i].moveDown();
 			}
 		}
 		
