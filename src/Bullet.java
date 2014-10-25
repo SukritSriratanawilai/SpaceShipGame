@@ -14,7 +14,7 @@ public class Bullet {
 	}
 		
 	public Bullet() throws SlickException {
-		bulletImage = new Image("res/Bullet1.png");
+		bulletImage = new Image("res/Bullet2.png");
 	}
 	
 	public void draw() {	
@@ -45,6 +45,20 @@ public class Bullet {
 			}			
 		}
 		return false;
+	}
+
+	public void moveDown() {
+		// TODO Auto-generated method stub
+		if (BulletY != 0) {
+			BulletY += 5;
+		}
+	}
+
+	public void moveUp() {
+		// TODO Auto-generated method stub
+		if (BulletY != 0) {
+			BulletY -= 5;
+		}
 	}
 
 	
