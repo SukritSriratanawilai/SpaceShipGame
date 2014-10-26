@@ -33,8 +33,10 @@ public class SpaceShipGame extends BasicGame {
 		}
 		g.drawString("score " + score, Game_Width - 120, 10);
 		g.drawString("hp " + Hp, Game_Width/8, 10);
-		for (int i = 1 ; i < max_bullet ; i++) {
-			bulletArray[i].draw();
+		for (int i = 0 ; i < max_bullet ; i++) {
+			if(isfireArray[i]) {
+				bulletArray[i].draw();
+			}
 		}
 		ship.draw();
 	}
@@ -80,6 +82,8 @@ public class SpaceShipGame extends BasicGame {
 			{	
 				isBulletCatch = bulletArray[i].updateBulletCatch(enemy);
 				if (isBulletCatch == true) {
+					bulletArray[i].removeToOutScreen();
+					isfireArray[i] = false;
 					break;
 				}
 			}	
@@ -113,7 +117,13 @@ public class SpaceShipGame extends BasicGame {
 			countBullet++;
 		}
 		for (int i = 0 ; i <= countBullet ; i++) {
-			bulletArray[i].update();
+			if (isfireArray[i]) {
+				bulletArray[i].update();
+				if (bulletArray[i].getX() > Game_Width) {
+					bulletArray[i].outOfScreen();
+					isfireArray[i] = false;
+				}
+			}
 		}
 	}
 
@@ -121,15 +131,9 @@ public class SpaceShipGame extends BasicGame {
 		
 		if (input.isKeyDown(Input.KEY_UP)) {
 			ship.moveUp();
-			for (int i = countBullet+1 ; i < max_bullet ; i++) {
-				bulletArray[i].moveUp();
-			}
 		}
 		if (input.isKeyDown(Input.KEY_DOWN)) {
 			ship.moveDown(Game_High);
-			for (int i = countBullet+1 ; i < max_bullet ; i++) {
-				bulletArray[i].moveDown();
-			}
 		}
 		
 	}

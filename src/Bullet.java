@@ -47,18 +47,28 @@ public class Bullet {
 		return false;
 	}
 
-	public void moveDown() {
+	public void removeToOutScreen() {
 		// TODO Auto-generated method stub
-		if (BulletY != 0) {
+		this.BulletY = -20;
+	}
+
+	public void moveDown(int maxScreen) {
+		// TODO Auto-generated method stub
+		if (BulletY != maxScreen - 50) {
 			BulletY += 5;
 		}
 	}
 
 	public void moveUp() {
 		// TODO Auto-generated method stub
-		if (BulletY != 0) {
+		if (BulletY != 30) {
 			BulletY -= 5;
 		}
+	}
+
+	public void outOfScreen() {
+		// TODO Auto-generated method stub
+		this.BulletY = -20;
 	}
 
 	
