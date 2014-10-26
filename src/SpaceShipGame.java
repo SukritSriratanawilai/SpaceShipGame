@@ -110,13 +110,13 @@ public class SpaceShipGame extends BasicGame {
 	
 	private void UpdateBullet(Input input, int delta) throws SlickException {
 		
-		if (input.isKeyPressed(Input.KEY_SPACE)) {
+		if (input.isKeyPressed(Input.KEY_J)) {
 			isfireArray[countBullet] = true;
 			System.out.println("fire");
 			bulletArray[countBullet].setXY(ship.getX()+ ship.getShipWidth()/2, ship.getY()+ ship.getShipHigh()/2);
 			countBullet++;
 		}
-		for (int i = 0 ; i <= countBullet ; i++) {
+		for (int i = 0 ; i < max_bullet ; i++) {
 			if (isfireArray[i]) {
 				bulletArray[i].update();
 				if (bulletArray[i].getX() > Game_Width) {
@@ -125,17 +125,25 @@ public class SpaceShipGame extends BasicGame {
 				}
 			}
 		}
+		if (countBullet == max_bullet-1){
+			countBullet = 0;
+		}
 	}
 
 	private void UpdateShipMovement(Input input, int delta) {
 		
-		if (input.isKeyDown(Input.KEY_UP)) {
+		if (input.isKeyDown(Input.KEY_W)) {
 			ship.moveUp();
 		}
-		if (input.isKeyDown(Input.KEY_DOWN)) {
+		if (input.isKeyDown(Input.KEY_S)) {
 			ship.moveDown(Game_High);
 		}
-		
+		if (input.isKeyDown(Input.KEY_A)) {
+			ship.moveLeft();
+		}
+		if (input.isKeyDown(Input.KEY_D)) {
+			ship.moveRight(Game_Width);
+		}
 	}
 
 	public static void main(String[] args) {

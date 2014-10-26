@@ -8,7 +8,7 @@ public class EnemyShip {
 	private int shipX;
 	private int shipY;
 	private Image shipImage;
-	private int vx = 5;
+	private int vx = 8;
 	Random random = new Random();
 	public float getX() { return shipX; }
 	public float getY() { return shipY; }

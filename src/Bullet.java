@@ -5,16 +5,11 @@ import org.newdawn.slick.SlickException;
 public class Bullet {
 	protected float BulletX;
 	protected float BulletY;
-	boolean checkGunFire;
 	Image bulletImage;
 	
 	public Bullet(float x, float y) throws SlickException {
 		this.setXY(x,y);
 		bulletImage = new Image("res/Bullet1.png");
-	}
-		
-	public Bullet() throws SlickException {
-		bulletImage = new Image("res/Bullet2.png");
 	}
 	
 	public void draw() {	

@@ -9,6 +9,8 @@ public class MyShip {
 	private int shipY;
 	private static final int shipWidth = 60;
 	private static final int shipHIGH = 60;
+	private int Vy = 5;
+	private int Vx = 5;
 	private Image shipImage;
 	public float getX() { return shipX; }
 	public float getY() { return shipY; }
@@ -28,7 +30,7 @@ public class MyShip {
 	public void moveUp() {
 		
 		if (shipY != 0) {
-			shipY -= 5;
+			shipY -= Vy;
 		}
 		
 	}
@@ -36,7 +38,7 @@ public class MyShip {
 	public void moveDown(int maxScreen) {
 		
 		if (shipY != maxScreen - 80) {
-			shipY += 5;
+			shipY += Vy;
 		}
 		
 	}
@@ -48,6 +50,18 @@ public class MyShip {
 			}			
 		}
 		return false;
+	}
+	public void moveLeft() {
+		// TODO Auto-generated method stub
+		if (shipX != 0) {
+			shipX -= Vx;
+		}
+	}
+	public void moveRight(int maxScreen) {
+		// TODO Auto-generated method stub
+		if (shipX != maxScreen - 80) {
+			shipX += Vx;
+		}
 	}
 
 }
