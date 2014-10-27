@@ -11,9 +11,9 @@ public class SpaceShipGame extends BasicGame {
 	public static final int	Game_Width = 800;
 	public static final int	enemy_count = 10;
 	public static final int	max_bullet = 200;
-	public static int Hp = 10;
+	public static int Hp = 5;
 	public boolean checkCatch;
-	private boolean isDeath = false;
+	private boolean isGameOver = false;
 	private boolean isBulletCatch = false;
 	private boolean [] isfireArray = new boolean[max_bullet];
 	private MyShip ship;
@@ -39,6 +39,9 @@ public class SpaceShipGame extends BasicGame {
 			}
 		}
 		ship.draw();
+		if(isGameOver) {
+			g.drawString("GameOver", Game_Width / 2, Game_High / 2);
+		}
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class SpaceShipGame extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 		
 		Input input = container.getInput();
-		if (isDeath == false) {
+		if (isGameOver == false) {
 			UpdateShipMovement(input , delta);
 			UpdateBullet(input , delta);
 			UpdateEnemyShip();		
@@ -99,7 +102,7 @@ public class SpaceShipGame extends BasicGame {
 				enemy.Death(Game_Width , Game_High);
 				checkCatch = false;
 				if (Hp == 0) {
-					isDeath = true;		
+					isGameOver = true;		
 				}
 			}
 			if (enemy.getX() < -50) {
